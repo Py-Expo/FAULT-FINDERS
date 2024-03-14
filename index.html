@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Student Online Attendance</title>
+    <link rel="stylesheet" href="style.css">
+    <script>
+        // JavaScript function to handle form submission and display login success message
+        function handleFormSubmit(event) {
+            // Prevent the default form submission behavior
+            event.preventDefault();
+            
+            // Get the form data
+            const formData = new FormData(event.target);
+            const registerNumber = formData.get('register_number');
+            const password = formData.get('password');
+
+            // Perform validation and authentication (you can replace this with your own logic)
+            const isLoggedIn = validateLogin(registerNumber, password);
+
+            if (isLoggedIn) {
+                // Display login successful message
+                alert("Login Successful");
+                // You can redirect to another page or perform other actions here
+            } else {
+                // Display login failed message or handle it as per your requirement
+                alert("Login Failed. Invalid credentials.");
+            }
+        }
+
+        // Sample function to validate login (replace with your own logic)
+        function validateLogin(registerNumber, password) {
+            // Perform validation here (e.g., check against database, etc.)
+            // For demonstration purposes, I'm returning true if both fields are non-empty
+            return registerNumber.trim() !== '' && password.trim() !== '';
+        }
+    </script>
+</head>
+<body>
+    <center>
+        <h1 class="fix">Student Online Attendance</h1>
+        <div class="nav">
+            <ul>
+                <li><a href="#">Home</a></li>
+                <li><a href="#">My Profile</a></li>
+                <li><a href="#">Alert</a></li>
+                <li><a href="#">Percentage</a></li>
+                <li><a href="#">Settings</a></li>
+                <li><a class="login" href="#">Log in</a></li>
+                <li><a class="signup" href="#">Sign up</a></li>
+            </ul>
+        </div>
+        <div class="log">
+            <div class="wrapper">
+                <!-- Add an id attribute to the form for easier targeting -->
+                <form action="{{url_for('ams_page')}}" id="loginForm" onsubmit="handleFormSubmit(event)">
+                    <h2>Login</h2>
+                    <div class="input-field">
+                        <input type="text" name="register_number" required>
+                        <label>Register number</label>
+                    </div>
+                    <div class="input-field">
+                        <input type="password" name="password" required>
+                        <label>Password</label>
+                    </div>
+                    <div class="forget">
+                        <label for="remember">
+                            <input type="checkbox" id="remember">
+                            <p>Remember me</p>
+                        </label>
+                    </div>
+                    <div class="forpas">
+                        <a href="#">Forgot password?</a>
+                    </div>
+                    <button type="submit">Log In</button>
+                    <div class="register">
+                        <p>Don't have an account? <a href="#">Register</a></p>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </center>
+</body>
+</html>
